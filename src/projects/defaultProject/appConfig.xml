@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sinalgo>
-	<ProjectSelector windowWidth="800" windowHeight="600" lastChosenProject="tokenTree" windowPosX="200" windowPosY="128" isMaximized="false" selectedTab="1" />
-	<GUI windowWidth="800" windowHeight="700" windowPosX="210" windowPosY="68" isMaximized="false" ControlPanelExpandSimulation="true" ControlPanelShowFullViewPanel="false" ControlPanelShowTextPanel="true" ControlPanelShowProjectControl="true" RunOperationIsLimited="false" helpWindowWidth="500" helpWindowHeight="500" helpWindowPosX="200" helpWindowPosY="200" helpWindowIsMaximized="false" />
-	<RandomSeed seedFromPreviousRun="4271949959109821369" />
-	<App lastSelectedFileDirectory="/home/eudes/ricm5-1/apd/td/sinalgo/" checkForUpdatesAtStartup="false" updateCheckTimeStamp="0" runCmdLineArgs="" />
-	<GenNodesDlg numNodes="15" />
+	<ProjectSelector windowWidth="800" windowHeight="600" lastChosenProject="bitAlt" windowPosX="200" windowPosY="168" isMaximized="false" selectedTab="1" />
+	<GUI windowWidth="800" windowHeight="700" windowPosX="210" windowPosY="68" isMaximized="false" ControlPanelExpandSimulation="true" ControlPanelShowFullViewPanel="false" ControlPanelShowTextPanel="true" ControlPanelShowProjectControl="true" RunOperationIsLimited="true" helpWindowWidth="500" helpWindowHeight="500" helpWindowPosX="200" helpWindowPosY="200" helpWindowIsMaximized="false" />
+	<RandomSeed seedFromPreviousRun="-217740126410873877" />
+	<App lastSelectedFileDirectory="/home/jeremy/Documents/RICM5/APD/sinalgo/" checkForUpdatesAtStartup="false" updateCheckTimeStamp="0" runCmdLineArgs="" />
+	<GenNodesDlg numNodes="2" />
 </sinalgo>
 

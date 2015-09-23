@@ -113,7 +113,7 @@
 		<!--  Models                                                               -->
 		<!--***********************************************************************-->
 		<!--The message transmission model used when none is specified-->
-		<DefaultMessageTransmissionModel value="RandomTime" />
+		<DefaultMessageTransmissionModel value="FifoRandom" />
 
 		<!--Default connectivity model used when none is specified-->
 		<DefaultConnectivityModel value="UDG" />
@@ -180,7 +180,9 @@
 
 	</Framework>
 	<Custom>
-<RandomMessageTransmission distribution="Uniform" min="1" max="20"/>
+	<!--*** <RandomMessageTransmission distribution="Uniform" min="1" max="20"/> *** -->
+<FifoRandom distribution="Exponential" lambda="1" />.
+
 	
 <Node defaultSize="20" />
 
@@ -202,6 +204,6 @@
 </RandomDirection>
 
 <QUDG rMin="30" rMax="50" ProbabilityType="constant" connectionProbability="0.6"/>
+<LossyDelivery DropRate="0.6"/>
 		</Custom>
 </Document>
-

@@ -204,6 +204,6 @@
 </RandomDirection>
 
 <QUDG rMin="30" rMax="50" ProbabilityType="constant" connectionProbability="0.6"/>
+<LossyDelivery DropRate="0.6"/>
 		</Custom>
 </Document>
-

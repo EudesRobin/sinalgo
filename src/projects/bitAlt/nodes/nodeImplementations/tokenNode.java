@@ -8,12 +8,14 @@ import java.util.Iterator;
 import projects.bitAlt.nodes.messages.ackMessage;
 import projects.bitAlt.nodes.messages.tokenMessage;
 import projects.bitAlt.nodes.timers.initTimer;
+import projects.bitAlt.nodes.timers.retryTimer;
 import sinalgo.configuration.WrongConfigurationException;
 import sinalgo.gui.transformation.PositionTransformation;
 import sinalgo.nodes.Node;
 import sinalgo.nodes.edges.Edge;
 import sinalgo.nodes.messages.Inbox;
 import sinalgo.nodes.messages.Message;
+import sinalgo.nodes.timers.Timer;
 import sinalgo.tools.Tools;
 
 
@@ -23,6 +25,8 @@ public class tokenNode extends Node {
 
 	private boolean estampille = false;
 
+	private Timer timer;
+	
 	public void preStep() {}
 
 	// ATTENTION lorsque init est appel� les liens de communications n'existent pas
@@ -38,11 +42,12 @@ public class tokenNode extends Node {
 
 	public void start(){
 		if(this.ID==1) {
-			this.passage=true;
 			Node node = this.outgoingConnections.iterator().next().endNode;
 			estampille = !estampille;
-			this.send(new tokenMessage(this, estampille), node);	
+			this.send(new tokenMessage(this, estampille), node);
+			System.out.println("nouveau Msg envoye");
 		}
+		(new retryTimer()).startRelative(10,this);
 	}
 
 	// Cette fonction g�re la r�ception de message
@@ -55,13 +60,24 @@ public class tokenNode extends Node {
 		{
 			Message m=inbox.next();
 			if (m instanceof ackMessage){
-				
+				if (this.estampille == ((ackMessage) m).estampille){
+					System.out.println("Ack reçut");
+					this.start();
+				}
 			}
 			else if (m instanceof tokenMessage){
-				
+				this.estampille = ((tokenMessage) m).estampille;
+				this.send(new ackMessage(this, estampille), ((tokenMessage) m).sender);
 			}
 
 		}
+	}
+	
+	public void resend(){
+		Node node = this.outgoingConnections.iterator().next().endNode;
+		this.send(new tokenMessage(this, estampille), node);
+		System.out.println("Msg renvoye");
+		(new retryTimer()).startRelative(10,this);
 	}
 	
 	public void neighborhoodChange() {}
