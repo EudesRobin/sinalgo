@@ -28,14 +28,11 @@
 		<!--If set to true, the chosen interference model is called at the end of every round to test for interferring packets. To increase performance, set this flag to FALSE if you do not consider interference.-->
 		<interference value="false" />
 
-		<!--Set this flag to true if interference only decreases if fewer messages are being sent and increases if more messages are being sent. If this flag is NOT set, interference for all messages currently being sent is reevaluated whenever a new message is being sent, and whenever a message stops being sent. When this flag is set, interference tests are reduced to a minimum, using the additivity property. This flag only affects the asynchronous mode. In synchronous mode, interference is checked exactly once for every message in every round.-->
+		<!--Set this flag to true if interference only decreases if  less messages are being sent and increases if more messages are being sent. This flag enables considerable optimizations. -->
 		<interferenceIsAdditive value="true" />
 
 		<!--Set this flag to true if a node can receive messages while it is sending messages itself, otherwise to false. This flag is only relevant if interference is turned on, and it must be handled properly in the used interference model.-->
 		<canReceiveWhileSending value="true" />
-
-		<!--Set this flag to true if a node can receive multiple messages in parallel, otherwise to false. When set to false, concurrent packets are all dropped. This flag is only relevant if interference is turned on, and it must be handled properly in the used interference model.-->
-		<canReceiveMultiplePacketsInParallel value="true" />
 
 		<!--The default type of edges to be used-->
 		<edgeType value="sinalgo.nodes.edges.BidirectionalEdge" />
@@ -49,25 +46,10 @@
 		<!--Defines how often the GUI is updated. The GUI is redrawn after every refreshRate-th round.-->
 		<refreshRate value="1" />
 
-		<!--If set to true, the framework will inform a sender whenever  a unicast message is dropped. In synchronous mode, the sender  is informed in the round after the message should have arrived, and  immediately upon arrival in asynchronous mode.-->
-		<generateNAckMessages value="false" />
-
-		<!--This flag only affects the asynchronous simulation mode.  When set to true, the framework calls handleEmptyEventQueue  on the project specific CustomGlobal whenever the event queue  becomes empty.-->
-		<handleEmptyEventQueue value="true" />
-
-		<!--The java-command used to start the simulation process. E.g. 'java', 'nice -n 19 java', 'time java' This command should NOT contain the -Xmx flag, nor set the classpath of java.-->
-		<javaCmd value="java" />
-
-		<!--Maximum memory the Java VM is allowed to use (in MB)-->
-		<javaVMmaxMem value="500" />
-
 		<!--***********************************************************************-->
 		<!--  Random number generators                                             -->
 		<!--***********************************************************************-->
-		<!--If set to true, the random number generators of the framework use the same seed as in the previous run.-->
-		<useSameSeedAsInPreviousRun value="false" />
-
-		<!--If set to true, and useSameSeedAsInPreviousRun is set to false,  the random number generators of the framework uses the specified fixed seed.-->
+		<!--If set to true, the random number generators of the framework use a fixed seed.-->
 		<useFixedSeed value="false" />
 
 		<!--The seed to be used by the random number generators if useFixedSeed is set to true.-->
@@ -146,13 +128,10 @@
 		<DefaultMobilityModel value="NoMobility" />
 
 		<!--Default reliability model used when none is specified-->
-		<DefaultReliabilityModel value="LossyDelivery" />
+		<DefaultReliabilityModel value="ReliableDelivery" />
 
 		<!--Default node implementation used when none is specified-->
-		<DefaultNodeImplementation value="bitAlt:tokenNode" />
-
-		<!--Show the models implemented by all projects in the drop down options. When set to false, only the models by the selected project and the default project are shown.-->
-		<showModelsOfAllProjects value="false" />
+		<DefaultNodeImplementation value="ringDij:tokenNode" />
 
 		<!--***********************************************************************-->
 		<!--  Node storage, position transformation                                -->
@@ -170,33 +149,6 @@
 		<nodeCollection3D value="sinalgo.runtime.nodeCollection.Geometric3DNodeCollection" />
 
 		<!--***********************************************************************-->
-		<!--  Export Settings                                                      -->
-		<!--***********************************************************************-->
-		<!--EPS 2 PDF command: This is the command that is used to convert an EPS file  into a PDF file. You can use the following parameters:   %s is the complete path from the root folder of the      framework to the SOURCE file (the eps)   %t is the complete path from the root folder of the      framework to the TARGET file (the pdf) These placeholders are set by the framework. Example:   'epstopdf %s')-->
-		<epsToPdfCommand value="epstopdf %s" />
-
-		<!--Enables the drawing of the bounding box of the deployment to EPS/PDF.-->
-		<epsDrawDeploymentAreaBoundingBox value="true" />
-
-		<!--Indicates whether the background in the ps should be  white or gray.  The gray version is easier to understand (especially in 3D) but the white one should be more useful to be imported in reports.-->
-		<epsDrawBackgroundWhite value="true" />
-
-		<!--***********************************************************************-->
-		<!--  Animation Settings                                                   -->
-		<!--***********************************************************************-->
-		<!--Draw an envelope for each message that is being sent-->
-		<showMessageAnimations value="false" />
-
-		<!--Width of the envelope (when the message animation is enabled)-->
-		<messageAnimationEnvelopeWidth value="30.0" />
-
-		<!--Height of the envelope (when the message animation is enabled)-->
-		<messageAnimationEnvelopeHeight value="20.0" />
-
-		<!--Color of the envelope (when the message animation is enabled)-->
-		<messageAnimationEnvelopeColor value="r=255,g=255,b=0" />
-
-		<!--***********************************************************************-->
 		<!--  Diverse Settings                                                     -->
 		<!--***********************************************************************-->
 		<!--Show hints on how to further optimize the simulation when some parameters seem not to be set optimally.-->
@@ -211,22 +163,27 @@
 		<!--The number of future events that are shown in the control panel-->
 		<shownEventQueueSize value="10" />
 
-		<!--Height of the output text field in pixels.-->
-		<outputTextFieldHeight value="200" />
-
-		<!--The length of the arrows. This length is multiplied by the current zoomLevel.-->
+		<!--The length of the arrows. This length is multiplied by the actualzoomLevel.-->
 		<arrowLength value="8" />
 
-		<!--The width of the arrows. This width is multiplied by the current zoomLevel.-->
+		<!--The width of the arrows. This width is multiplied by the actualzoomLevel.-->
 		<arrowWidth value="1" />
 
 		<!--The dsfault value of the rounds field.-->
 		<defaultRoundNumber value="1" />
 
+		<!--EPS 2 PDF command: This is the command that is used to convert an EPS file  into a PDF file. You can use the following parameters:   %s is the complete path from the root folder of the      framework to the SOURCE file (the eps)   %t is the complete path from the root folder of the      framework to the TARGET file (the pdf) These placeholders are set by the framework. Example:   'epstopdf %s')-->
+		<epsToPdfCommand value="epstopdf %s" />
+
+		<!--Indicates whether the background in the ps should be  white or gray.  The gray version is easier to understand (especially in 3D) but the white one should be more useful to be imported in reports.-->
+		<epsDrawBackgroundWhite value="true" />
+
 	</Framework>
 	<Custom>
+	<!--*** <RandomMessageTransmission distribution="Uniform" min="1" max="20"/> *** -->
+<FifoRandom distribution="Exponential" lambda="1" />.
 
-<FifoRandom distribution="Exponential" lambda="1" />
+	
 <Node defaultSize="20" />
 
 <GeometricNodeCollection rMax="150"/>
@@ -248,6 +205,5 @@
 
 <QUDG rMin="30" rMax="50" ProbabilityType="constant" connectionProbability="0.6"/>
 <LossyDelivery DropRate="0.6"/>
-			</Custom>
+		</Custom>
 </Document>
-

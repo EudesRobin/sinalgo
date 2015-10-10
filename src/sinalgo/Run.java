@@ -189,9 +189,13 @@ public class Run {
 	 */
 	private static void testJavaVersion() {
 		// Test that java version is OK (must be >= 1.5)
-		String javaVersion = System.getProperty("java.vm.version");
+		
+		//String javaVersion = System.getProperty("java.vm.version");
+		// Le contenu du champ semble avoir changé, runtime.version corespond.
+		String javaVersion = System.getProperty("java.runtime.version");
 		javaVersion = javaVersion.replace('.', '#');
-		String[] versionParts = javaVersion.split("#"); // can't split with '.', as regex 
+		String[] versionParts = javaVersion.split("#"); // can't split with '.', as regex
+		
 		if(versionParts.length < 2) {
 			System.err.println("You may have an invalid Java version: " + javaVersion);
 		} else {
