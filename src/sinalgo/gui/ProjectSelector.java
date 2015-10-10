@@ -167,11 +167,10 @@ public class ProjectSelector extends JFrame implements ActionListener, ListSelec
 		for(String s : list) {
 			blocklist.add(s);
 		}
-		//System.out.println(Configuration.projectDirInSourceFolder);
+
 		File file = new File(Configuration.sourceDirPrefix+"/"+Configuration.projectDirInSourceFolder);
 		String[] projects = file.list(new FilenameFilter() {
 			public boolean accept(File dir, String name){
-				
 				//only allow projects not calles CVS and only the ones that have a compiled version in the binaries folder.
 				if(blocklist.contains(name)){
 					return false;
@@ -183,10 +182,8 @@ public class ProjectSelector extends JFrame implements ActionListener, ListSelec
 				return false;
 			}
 		});
-
 		// sort alphabetically
 		java.util.Arrays.sort(projects);
-
 		return projects;
 	}
 	
@@ -203,7 +200,6 @@ public class ProjectSelector extends JFrame implements ActionListener, ListSelec
 		if(projects == null) {
 			Main.fatalError("Cannot find the project folder. Please ensure that the framework is installed properly.");
 		}
-		
 		Arrays.sort(projects); // sort the projects in ascending order
 		
 		this.addComponentListener(new ComponentListener() {
@@ -264,7 +260,6 @@ public class ProjectSelector extends JFrame implements ActionListener, ListSelec
 		left.setLayout(new BorderLayout());
 		// List of all projects
 		selection.setListData(projects);
-
 		selection.setSelectedValue(appConfig.lastChosenProject, true);
 		if(!selection.isSelectionEmpty()) {
 			selectedProjectName = (String) selection.getSelectedValue();

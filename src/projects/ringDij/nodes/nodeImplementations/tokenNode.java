@@ -33,7 +33,6 @@ public class tokenNode extends Node {
 
 	public void start(){
 		state = (int) (Math.random() * 100000.0) % Tools.getNodeList().size();
-		Node n = this.outgoingConnections.iterator().next().endNode;
 		this.send(new tokenMessage(this,state), getDroite());
 	}
 
@@ -44,13 +43,11 @@ public class tokenNode extends Node {
 		while(inbox.hasNext())
 		{
 			Message m=inbox.next();
-			Node n = this.outgoingConnections.iterator().next().endNode;
-			System.out.println(this.ID+":"+n.ID);
 			if(this.ID==1 && ((tokenMessage) m).state==state){
 				state= (state +1  )% Tools.getNodeList().size();
 				this.send(new tokenMessage(this,state), getDroite());
 			}
-			
+
 			if(this.ID!=1 && ((tokenMessage) m).state!=state){
 				state = ((tokenMessage) m).state;
 				this.send(new tokenMessage(this,state), getDroite());
@@ -59,7 +56,6 @@ public class tokenNode extends Node {
 	}
 
 	private Node getDroite(){
-		
 		Iterator<Edge> liste = this.outgoingConnections.iterator();
 		Node n;
 		while(liste.hasNext()){
@@ -70,8 +66,8 @@ public class tokenNode extends Node {
 		}
 		return null;
 	}
-	
-	
+
+
 
 	public void neighborhoodChange() {}
 	public void postStep() {}

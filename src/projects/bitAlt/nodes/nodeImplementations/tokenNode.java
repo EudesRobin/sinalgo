@@ -71,6 +71,7 @@ public class tokenNode extends Node {
 			}
 
 		}
+		
 	}
 	
 	public void resend(){
