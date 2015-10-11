@@ -1,1 +1,4 @@
 RING DIJKSTRA
+
+/!\ Pour que les noeuds voisins soient vus, l'anneau doit être composé à minima
+    de 14 noeuds (génération circle). Ou aller modifier les params dans Config.xml...

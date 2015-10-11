@@ -188,8 +188,10 @@ public class Run {
 	 * Test that the java VM version is not below 1.5 
 	 */
 	private static void testJavaVersion() {
-		// Test that java version is OK (must be >= 1.5)
-		String javaVersion = System.getProperty("java.vm.version");
+		// Test that java version is OK (must be >= 1.5) old.
+		//String javaVersion = System.getProperty("java.vm.version");
+		// Fix warning... :)
+		String javaVersion = System.getProperty("java.runtime.version");
 		javaVersion = javaVersion.replace('.', '#');
 		String[] versionParts = javaVersion.split("#"); // can't split with '.', as regex 
 		if(versionParts.length < 2) {
